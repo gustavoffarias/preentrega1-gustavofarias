@@ -38,5 +38,20 @@
     "category": "filtros",
     "price": 90000,
     "stock": 10
+  },
+  {
+    "title": "aceite semisintetico",
+    "category": "aceites",
+    "price": "15555",
+    "stock": 0,
+    "id": "145ff0b721ccfa88b2e1e067"
+  },
+  {
+    "title": "aceite 10w40",
+    "photo": "aceite.png",
+    "category": "lubes",
+    "price": "142222",
+    "stock": 0,
+    "id": "cf657fa9c8db9d004789c045"
   }
 ]

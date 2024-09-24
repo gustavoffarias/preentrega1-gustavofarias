@@ -1,12 +1,23 @@
 [
   {
+    "photo": "gustavo.png",
     "email": "gustavo@gmail.com",
     "password": "147369",
+    "role": 0,
     "id": "b4e30b61f5abb2d5c2d297f8"
   },
   {
+    "photo": "francisco.png",
     "email": "francisco@gmail.com",
     "password": "147369",
+    "role": 0,
     "id": "7242a8a0a9dd0b7e2fd08720"
+  },
+  {
+    "photo": "farias.png",
+    "email": "farias@gmail.com",
+    "password": "963147",
+    "role": 0,
+    "id": "2bccc48eafadab4cdb67519c"
   }
 ]

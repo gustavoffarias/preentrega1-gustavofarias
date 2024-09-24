@@ -5,15 +5,15 @@ async function getAllProducts(req, res, next) {
     let { category } = req.query;
     let response;
     if (!category) {
-      response = await productsManager.readAll();
+      response = await productsManager.read();
     } else {
-      response = await productsManager.readAll(category);
+      response = await productsManager.read(category);
     }
 
     if (response.length > 0) {
       return res
         .status(200)
-        .json({ message: "ALL OUR PRODUCTS", products: response });
+        .json({ message: "ALL PRODUCTS", products: response });
     } else {
       const error = new Error("ERROR 404, CATEGORY NOT FOUND");
       error.statusCode = 404;
@@ -26,13 +26,14 @@ async function getAllProducts(req, res, next) {
 
 async function createGet(req, res, next) {
   try {
-    const { title, category, price } = req.params;
+    const { title, photo, category, price } = req.params;
     let { stock } = req.query;
     if (!stock) {
       stock = 0;
     }
     const response = await productsManager.create({
       title,
+      photo,
       category,
       price,
       stock,
@@ -45,8 +46,9 @@ async function createGet(req, res, next) {
 
 async function getProduct(req, res, next) {
   try {
+    // Obtener el ID del producto
     const { pid } = req.params;
-    const response = await productsManager.readId(pid);
+    const response = await productsManager.readOne(pid);
     if (response) {
       return res.status(200).json({ message: "PRODUCT READ", response });
     } else {
@@ -61,12 +63,11 @@ async function getProduct(req, res, next) {
 
 async function update(req, res, next) {
   try {
-    // Obtener el ID del producto
     const { pid } = req.params;
-    // Obtener los datos de actualización del cuerpo de la solicitud 
-    const updateData = req.body; 
+    // Obtener los datos de actualización del cuerpo de la solicitud
+    const updateData = req.body;
     // Llamar al método update de productsManager
-    const response = await productsManager.update(pid, updateData); 
+    const response = await productsManager.update(pid, updateData);
     if (response) {
       return res.status(200).json({ message: "PRODUCT UPDATED", response });
     } else {
@@ -81,10 +82,9 @@ async function update(req, res, next) {
 
 async function deleteProduct(req, res, next) {
   try {
-    // Obtener el ID del producto
-    const { pid } = req.params; 
+    const { pid } = req.params;
     // Llamar al método delete de productsManager
-    const response = await productsManager.delete(pid); 
+    const response = await productsManager.delete(pid);
     if (response) {
       return res.status(200).json({ message: "PRODUCT DELETED", response });
     } else {

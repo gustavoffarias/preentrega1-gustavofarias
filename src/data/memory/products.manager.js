@@ -7,7 +7,7 @@ class ProductsManager {
     this.exists();
   }
   exists() {
-    //verificamos si existe o no existe el archivo, si no existe es un array vacio
+    //verificamos si existe o no existe el archivo, para saber si es un array vacio o no
     const exist = fs.existsSync(this.path);
     if (!exist) {
       fs.writeFileSync(this.path, JSON.stringify([]));
@@ -18,7 +18,7 @@ class ProductsManager {
   }
 
   //metodo que lea el archivo
-  async readAll(category) {
+  async read(category) {
     try {
       const data = await fs.promises.readFile(this.path, "utf-8");
       const parseData = JSON.parse(data);
@@ -39,9 +39,9 @@ class ProductsManager {
   }
 
   //metodo que lea por id
-  async readId(id) {
+  async readOne(id) {
     try {
-      const all = await this.readAll();
+      const all = await this.read();
       const one = all.find((each) => each.id === id);
       console.log(one);
       return one;
@@ -55,7 +55,7 @@ class ProductsManager {
   async create(data) {
     try {
       data.id = crypto.randomBytes(12).toString("hex");
-      const all = await this.readAll();
+      const all = await this.read();
       all.push(data);
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
@@ -69,50 +69,48 @@ class ProductsManager {
   //metodo actuaizar
   async update(id, newData) {
     try {
-      const all = await this.readAll();
+      const all = await this.read();
       const index = all.findIndex((each) => each.id === id);
       if (index === -1) {
         // Producto no encontrado
-        return null; 
+        return null;
       }
       // Actualizar los datos del producto
       // Mezcla de los datos existentes y nuevos
-      all[index] = { ...all[index], ...newData }; 
+      all[index] = { ...all[index], ...newData };
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
       // Devuelve el producto actualizado
-      return all[index]; 
+      return all[index];
     } catch (error) {
       console.log(error);
       throw error;
     }
   }
 
- //metodo borrar
+  //metodo borrar
   async delete(id) {
     try {
-      const all = await this.readAll();
+      const all = await this.read();
       const index = all.findIndex((each) => each.id === id);
       if (index === -1) {
         // Producto no encontrado
-        return null; 
+        return null;
       }
       // Eliminar el producto
       // Remueve el producto del array
-      all.splice(index, 1); 
+      all.splice(index, 1);
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
       // Mensaje de confirmación
-      return { message: `Product ${id} deleted`}; 
+      return { message: `Product ${id} deleted` };
     } catch (error) {
       console.log(error);
       throw error;
     }
   }
-
-  
 }
 
 const productsManager = new ProductsManager("./src/data/fs/products.json");
-//manager.read()
+
 export default productsManager;

@@ -65,15 +65,15 @@ class UsersManager {
       const index = all.findIndex((each) => each.id === id);
       if (index === -1) {
         // usuario no encontrado
-        return null; 
+        return null;
       }
       // Actualizar los datos del usuario
       // Mezcla de los datos existentes y nuevos
-      all[index] = { ...all[index], ...newData }; 
+      all[index] = { ...all[index], ...newData };
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
       // Devuelve el usuario actualizado
-      return all[index]; 
+      return all[index];
     } catch (error) {
       console.log(error);
       throw error;
@@ -87,15 +87,15 @@ class UsersManager {
       const index = all.findIndex((each) => each.id === id);
       if (index === -1) {
         // Producto no encontrado
-        return null; 
+        return null;
       }
       // Eliminar el producto
       // Remueve el producto del array
-      all.splice(index, 1); 
+      all.splice(index, 1);
       const stringAll = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, stringAll);
       // Mensaje de confirmación
-      return { message: `User ${id} deleted` }; 
+      return { message: `User ${id} deleted` };
     } catch (error) {
       console.log(error);
       throw error;
@@ -104,4 +104,5 @@ class UsersManager {
 }
 
 const usersManager = new UsersManager("./src/data/fs/users.json");
+
 export default usersManager;
