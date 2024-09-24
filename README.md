@@ -3,6 +3,5 @@
 <p>Para consultar los products o user, una vez iniciado el servidor en el puerto de referencia (8000), ingresamos en nuestro navegador:</p>
 <p>http://localhost:8000/api/users/
 <br>http://localhost:8000/api/products/</p>
-<p>Adicionalmente, se agrego un metodo GET para crear productos desde el navegador, sin unsar Postman.</p>
-<p>Puede consultar el archivo products.api.js par verificar el uso de rutas, alli tambien se acalara a modo de ejemplo el uso del GET para craar un objeto.</p>
+<p>Adicionalmente, se agrego un metodo GET para crear productos desde el navegador, sin unsar Postman. Puede consultar el archivo products.api.js par verificar el uso de rutas, alli tambien se acalara a modo de ejemplo el uso del GET para craar un objeto.</p>
 <p>Para el manejo de errores (rutas no encontradas y validaciones), se implemento middleware.</p>
