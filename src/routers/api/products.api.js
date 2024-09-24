@@ -14,7 +14,7 @@ const productsRouter = Router();
 //rutas de products
 productsRouter.get("/", getAllProducts);
 productsRouter.get("/:pid", getProduct);
-// Ruta par crear un producto, por ejemplo /producto/titulo del producto/categoria/10000
+// Ruta par crear un products, por ejemplo /producto/titulo del producto/categoria/10000
 productsRouter.get("/:title/:photo/:category/:price", createGet);
 // Ruta par crear un producto
 productsRouter.post("/", validData, create);
